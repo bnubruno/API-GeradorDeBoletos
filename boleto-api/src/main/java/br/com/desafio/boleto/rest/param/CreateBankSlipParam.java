@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import br.com.desafio.boleto.entity.Customer;
 import br.com.desafio.boleto.exception.InvalidObjectException;
-import br.com.desafio.boleto.model.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

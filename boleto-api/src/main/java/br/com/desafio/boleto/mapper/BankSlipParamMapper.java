@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import br.com.desafio.boleto.dto.CreateBankSlipDTO;
 import br.com.desafio.boleto.exception.InvalidObjectException;
 import br.com.desafio.boleto.rest.param.CreateBankSlipParam;
+import br.com.desafio.mapper.EntityMapper;
 
 @Mapper(componentModel = "spring", uses = { CustomerMapper.class })
 public interface BankSlipParamMapper extends EntityMapper<CreateBankSlipDTO, CreateBankSlipParam> {

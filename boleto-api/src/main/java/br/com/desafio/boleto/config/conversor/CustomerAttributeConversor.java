@@ -3,7 +3,7 @@ package br.com.desafio.boleto.config.conversor;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import br.com.desafio.boleto.model.Customer;
+import br.com.desafio.boleto.entity.Customer;
 
 @Converter(autoApply = true)
 public class CustomerAttributeConversor implements AttributeConverter<Customer, String> {

@@ -2,7 +2,7 @@ package br.com.desafio.boleto.mapper;
 
 import org.mapstruct.Mapper;
 
-import br.com.desafio.boleto.model.Customer;
+import br.com.desafio.boleto.entity.Customer;
 
 @Mapper(componentModel = "spring")
 public class CustomerMapper {

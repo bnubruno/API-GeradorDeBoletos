@@ -3,13 +3,14 @@ package br.com.desafio.boleto.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.desafio.boleto.entity.BankSlip;
+import br.com.desafio.boleto.entity.BankSlipStatus;
 import br.com.desafio.boleto.exception.EmptyRequestException;
 import br.com.desafio.boleto.exception.InvalidObjectException;
-import br.com.desafio.boleto.model.BankSlip;
-import br.com.desafio.boleto.model.BankSlipStatus;
 import br.com.desafio.boleto.repository.BankSlipRepository;
 import br.com.desafio.boleto.rest.param.CreateBankSlipParam;
 import br.com.desafio.boleto.rest.param.PayBankslipParam;
+import br.com.desafio.service.AbstractServiceImpl;
 
 @Service
 public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, BankSlip, String> {

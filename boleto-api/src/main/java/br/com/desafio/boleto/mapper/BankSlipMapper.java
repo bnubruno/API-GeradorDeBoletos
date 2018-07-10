@@ -8,8 +8,9 @@ import org.mapstruct.Mappings;
 import org.springframework.util.StringUtils;
 
 import br.com.desafio.boleto.dto.BankSlipDTO;
+import br.com.desafio.boleto.entity.BankSlip;
 import br.com.desafio.boleto.exception.InvalidObjectException;
-import br.com.desafio.boleto.model.BankSlip;
+import br.com.desafio.mapper.EntityMapper;
 
 @Mapper(componentModel = "spring", uses = { CustomerMapper.class })
 public interface BankSlipMapper extends EntityMapper<BankSlipDTO, BankSlip> {
