@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import br.com.desafio.contaazul.boleto.model.AbstractEntity;
 import br.com.desafio.contaazul.boleto.repository.AbstractCrudRespository;
 import br.com.desafio.contaazul.boleto.util.Util;
@@ -75,6 +78,11 @@ public class AbstractServiceImpl<R extends AbstractCrudRespository<T, ID>, T ext
 
 	public boolean isIdGeneratorService() {
 		return false;
+	}
+
+	@Override
+	public Page<T> findAll(Pageable pageable) {
+		return getRepository().findAll(pageable);
 	}
 
 }

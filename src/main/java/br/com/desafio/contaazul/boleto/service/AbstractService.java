@@ -3,6 +3,9 @@ package br.com.desafio.contaazul.boleto.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import br.com.desafio.contaazul.boleto.model.AbstractEntity;
 
 public interface AbstractService<T extends AbstractEntity<ID>, ID> {
@@ -24,5 +27,7 @@ public interface AbstractService<T extends AbstractEntity<ID>, ID> {
 	void delete(T entity);
 
 	Optional<T> findById(ID id);
+	
+	Page<T> findAll(Pageable pageable);
 
 }

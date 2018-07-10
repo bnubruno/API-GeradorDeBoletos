@@ -7,12 +7,12 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.util.StringUtils;
 
-import br.com.desafio.contaazul.boleto.dto.BankSlipDTO;
+import br.com.desafio.contaazul.boleto.dto.CreateBankSlipDTO;
 import br.com.desafio.contaazul.boleto.exception.InvalidObjectException;
-import br.com.desafio.contaazul.boleto.model.BankSlip;
+import br.com.desafio.contaazul.boleto.rest.param.CreateBankSlipParam;
 
 @Mapper(componentModel = "spring", uses = { CustomerMapper.class })
-public interface BankSlipMapper extends EntityMapper<BankSlipDTO, BankSlip> {
+public interface BankSlipParamMapper extends EntityMapper<CreateBankSlipDTO, CreateBankSlipParam> {
 
 	default LocalDate toDueDate(String dueDate) throws InvalidObjectException {
 		if (StringUtils.isEmpty(dueDate)) {
@@ -20,18 +20,16 @@ public interface BankSlipMapper extends EntityMapper<BankSlipDTO, BankSlip> {
 		}
 		return LocalDate.parse(dueDate);
 	}
-	
 
 	@Mappings({ //
 			@Mapping(source = "dueDate", target = "due_date"), //
 			@Mapping(source = "totalInCents", target = "total_in_cents"), //
 	})
-	public BankSlipDTO toDto(BankSlip entity) throws InvalidObjectException;
+	public CreateBankSlipDTO toDto(CreateBankSlipParam entity) throws InvalidObjectException;
 
 	@Mappings({ //
-			@Mapping(source = "total_in_cents", target = "totalInCents"), //
 			@Mapping(source = "due_date", target = "dueDate"), //
+			@Mapping(source = "total_in_cents", target = "totalInCents"), //
 	})
-	public BankSlip toEntity(BankSlipDTO dto) throws InvalidObjectException;
-
+	public CreateBankSlipParam toEntity(CreateBankSlipDTO dto) throws InvalidObjectException;
 }

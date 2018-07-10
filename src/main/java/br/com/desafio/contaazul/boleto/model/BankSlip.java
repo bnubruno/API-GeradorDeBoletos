@@ -25,7 +25,7 @@ public class BankSlip implements AbstractEntity<String> {
 
 	@Column(nullable = false)
 	@NotNull
-	private LocalDate date;
+	private LocalDate dueDate;
 
 	@Column(nullable = false, scale = 16, precision = 0)
 	@NotNull
@@ -38,5 +38,9 @@ public class BankSlip implements AbstractEntity<String> {
 	@Column(nullable = false, length = 1)
 	@NotNull
 	private BankSlipStatus status;
+
+	public BigDecimal getFine(LocalDate actualDate) {
+		return Fine.of(this.totalInCents, this.dueDate, actualDate);
+	}
 
 }
