@@ -19,7 +19,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket apis() {
 		return new Docket(DocumentationType.SWAGGER_2) //
-				.select().apis(RequestHandlerSelectors.basePackage("br.com.desafio.contaazul.boleto")).paths(PathSelectors.any()).build().apiInfo(apiInfo());
+				.select().apis(RequestHandlerSelectors.basePackage("br.com.desafio.boleto")).paths(PathSelectors.any()).build().apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {

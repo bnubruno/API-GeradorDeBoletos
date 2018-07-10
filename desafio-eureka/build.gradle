@@ -31,6 +31,7 @@ ext {
 dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
 	compile('org.springframework.cloud:spring-cloud-starter-config')
+	compile group: 'javax.xml', name: 'jaxb-api', version: '2.1'
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -34,13 +34,30 @@ public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, Ban
 		return save(bankSlip);
 	}
 
+	/**
+	 * 
+	 * Altera a situação para Pago
+	 * 
+	 * @param payParam
+	 * @return
+	 * @throws EmptyRequestException
+	 */
 	public BankSlip pay(PayBankslipParam payParam) throws EmptyRequestException {
 		payParam.validate();
 
-		BankSlip bankSlip = findById(payParam.getIdBankslip()).orElseThrow(() -> new EmptyRequestException("Bankslip not found with the specified id"));
-		bankSlip.setStatus(BankSlipStatus.PAID);
+		return changeStatusTo(payParam.getIdBankslip(), BankSlipStatus.PAID);
+	}
 
-		return save(bankSlip);
+	/**
+	 * Altera a situação para Cancelado
+	 * 
+	 * @param idBankslip
+	 * @return
+	 * @throws EmptyRequestException
+	 */
+	public BankSlip cancel(String idBankslip) throws EmptyRequestException {
+
+		return changeStatusTo(idBankslip, BankSlipStatus.CANCELED);
 	}
 
 	private BankSlip createBankSlipByParam(CreateBankSlipParam param) {
@@ -51,6 +68,12 @@ public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, Ban
 
 		bankSlip.setStatus(BankSlipStatus.PENDING);
 		return bankSlip;
+	}
+
+	private BankSlip changeStatusTo(String idBankslip, BankSlipStatus newStatus) throws EmptyRequestException {
+		BankSlip bankSlip = findById(idBankslip).orElseThrow(() -> new EmptyRequestException("Bankslip not found with the specified id"));
+		bankSlip.setStatus(newStatus);
+		return save(bankSlip);
 	}
 
 	@Override

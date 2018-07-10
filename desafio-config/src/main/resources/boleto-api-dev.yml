@@ -14,7 +14,6 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-
   h2:
     console:
       enabled: true
@@ -25,15 +24,19 @@ spring:
 management:
   security:
     enabled: false
-    bearerAuth: []
-  contextPath: /management
-  eureka:
+eureka:
   client:
     defaultZone: ${services.eureka.url}
   instance:
     preferIpAddress: true
+    statusPageUrlPath: /rest/actuator/info
+    healthCheckUrlPath: /rest/actuator/health
   health:
     db:
       enabled: true
     defaults:
       enabled: true
+server:
+   servlet:
+      context-path: /rest
+   port: 8780

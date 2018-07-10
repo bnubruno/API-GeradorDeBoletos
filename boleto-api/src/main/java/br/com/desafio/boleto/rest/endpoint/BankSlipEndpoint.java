@@ -2,7 +2,6 @@ package br.com.desafio.boleto.rest.endpoint;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.NoResultException;
 
@@ -12,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,10 +63,10 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 			@ApiResponse(code = 400, message = "Bankslip not provided in the request body"), //
 			@ApiResponse(code = 422, message = "Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values"), //
 	})
-	@PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<BankSlipDTO> create(@RequestBody CreateBankSlipDTO createBankSlipDTO) throws InvalidObjectException, EmptyRequestException {
-		log.info("Creating a bankslip " + createBankSlipDTO.toString());
 
+		log.info("Creating a bankslip " + createBankSlipDTO.toString());
 		if (createBankSlipDTO.isNull()) {
 			throw new EmptyRequestException("Bankslip not provided in the request body");
 		}
@@ -82,12 +82,11 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 			@ApiResponse(code = 400, message = "Bankslip not provided in the request body"), //
 			@ApiResponse(code = 422, message = "Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values"), //
 	})
-	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<BankSlipDTO>> list( //
-			@RequestParam(required = false) Optional<Integer> page, //
-			@RequestParam(required = false) Optional<Integer> size) throws APIException {
+	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<BankSlipDTO>> list(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
 
-		PageRequest pageable = PageRequest.of(page.orElse(0), size.orElse(9999));
+		log.info("Fetch a lista of bankslips");
+		PageRequest pageable = PageRequest.of(page, size);
 		Page<BankSlip> bankSlipsPage = getService().findAll(pageable);
 
 		return ResponseEntity.ok(getMapper().toDto(bankSlipsPage.getContent()));
@@ -100,17 +99,32 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<BankSlipDTO> detail(@PathVariable("id") String id) throws APIException {
 
+		log.info("Find a bankslip by id " + id);
 		BankSlip bankslip = getService().findById(id).orElseThrow(() -> new NoResultException("Bankslip not found with the specified id"));
 		return ResponseEntity.ok(getDetailMapper().toDto(bankslip));
 	}
 
+	@ApiResponses(value = { //
+			@ApiResponse(code = 204, message = "No content"), //
+			@ApiResponse(code = 404, message = "Bankslip not found with the specified id"), //
+	})
 	@PostMapping(value = "/{id}/payments", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<BankSlipDTO> create(@PathVariable("id") String idBankslip, @RequestParam(value = "payment_date") String paymentDateStr) throws InvalidObjectException, EmptyRequestException {
+	public ResponseEntity<Void> create(@PathVariable("id") String idBankslip, @RequestParam(value = "payment_date") String paymentDateStr) throws InvalidObjectException, EmptyRequestException {
 		LocalDate paymentDate = Util.toLocalDate(paymentDateStr);
 
+		log.info("Pay a bankslip by id " + idBankslip + " in " + paymentDateStr);
 		getService().pay(new PayBankslipParam(idBankslip, paymentDate));
 
-		return null;
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable("id") String id) throws EmptyRequestException {
+
+		log.info("Cancel a bankslip with id " + id);
+		getService().cancel(id);
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

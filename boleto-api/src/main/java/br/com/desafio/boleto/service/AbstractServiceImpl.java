@@ -25,7 +25,7 @@ public class AbstractServiceImpl<R extends AbstractCrudRespository<T, ID>, T ext
 
 	@Override
 	public T save(T entity) {
-		if (isIdGeneratorService()) {
+		if (isIdGeneratorService() && entity.getId() == null) {
 			entity.setId(getNewID());
 		}
 		return getRepository().save(entity);

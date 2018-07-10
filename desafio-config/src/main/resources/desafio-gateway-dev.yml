@@ -2,13 +2,13 @@ spring:
   application:
     name: desafio-gateway
 server:
-  port: 8765
+  port: 8080
 zuul:
   ignoredServices: '*'
   routes:
-    desafio-api:
+    boleto-api:
       path: /rest/**
-      serviceId: desafio-api
+      serviceId: boleto-api
       stripPrefix: false
 info:
   component: Edge Server
