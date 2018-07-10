@@ -1,0 +1,15 @@
+server:
+  port: 7771
+eureka:
+  client:
+    defaultZone: ${services.eureka.url}
+  instance:
+    preferIpAddress: true
+management:
+  security:
+    enabled: false
+  health:
+    db:
+      enabled: true
+    defaults:
+      enabled: true

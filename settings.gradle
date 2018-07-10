@@ -1,1 +1,7 @@
-rootProject.name = 'boleto'
+rootProject.name = 'desafio'
+
+include 'desafio-config'
+include 'desafio-eureka'
+include 'desafio-gateway'
+include 'desafio-api'
+include 'boleto-api'

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: desafio-api
+  profiles:
+    active: dev

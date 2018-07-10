@@ -1,0 +1,3 @@
+services:
+  eureka:
+    url: http://ip_de_prod:8761/eureka

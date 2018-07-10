@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: desafio-gateway
+server:
+  port: 8765
+zuul:
+  ignoredServices: '*'
+  routes:
+    desafio-api:
+      path: /rest/**
+      serviceId: desafio-api
+      stripPrefix: false
+info:
+  component: Edge Server
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${services.eureka.url}
+    registerWithEureka: false
