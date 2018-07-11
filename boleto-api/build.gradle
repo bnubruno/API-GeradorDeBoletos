@@ -44,7 +44,7 @@ dependencies {
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 	compile('org.mapstruct:mapstruct-jdk8:1.2.0.Final')
 	
-	compile project(':desafio-base');
+	compile project(':desafio-base')
 	
 	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 	apt "org.projectlombok:lombok:1.18.0"

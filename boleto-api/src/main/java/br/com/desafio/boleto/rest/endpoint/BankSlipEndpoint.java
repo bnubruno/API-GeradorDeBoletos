@@ -1,7 +1,9 @@
 package br.com.desafio.boleto.rest.endpoint;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 
@@ -78,11 +80,6 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	}
 
 	@ApiOperation(value = "Retorna uma lista de boletos")
-	@ApiResponses(value = { //
-			@ApiResponse(code = 201, message = "Bankslip created"), //
-			@ApiResponse(code = 400, message = "Bankslip not provided in the request body"), //
-			@ApiResponse(code = 422, message = "Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values"), //
-	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<BankSlipDTO>> list(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
 
@@ -95,6 +92,7 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 
 	@ApiOperation(value = "Retorna o boleto pelo ID")
 	@ApiResponses(value = { //
+			@ApiResponse(code = 200, message = "Ok"), //
 			@ApiResponse(code = 404, message = "Bankslip not found with the specified id"), //
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -105,12 +103,13 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 		return ResponseEntity.ok(getDetailMapper().toDto(bankslip));
 	}
 
+	@ApiOperation(value = "Recebe o pagamento de um boleto")
 	@ApiResponses(value = { //
 			@ApiResponse(code = 204, message = "No content"), //
 			@ApiResponse(code = 404, message = "Bankslip not found with the specified id"), //
 	})
 	@PostMapping(value = "/{id}/payments", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Void> create(@PathVariable("id") String idBankslip, @RequestParam(value = "payment_date") String paymentDateStr) throws InvalidObjectException, EmptyRequestException {
+	public ResponseEntity<Void> pay(@PathVariable("id") String idBankslip, @RequestParam(value = "payment_date") String paymentDateStr) throws InvalidObjectException, EmptyRequestException {
 		LocalDate paymentDate = Util.toLocalDate(paymentDateStr);
 
 		log.info("Pay a bankslip by id " + idBankslip + " in " + paymentDateStr);
@@ -119,13 +118,21 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	@ApiOperation(value = "Recebe o cancelamento de um boleto")
+	@ApiResponses(value = { //
+			@ApiResponse(code = 204, message = "No content"), //
+			@ApiResponse(code = 404, message = "Bankslip not found with the specified id"), //
+	})
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable("id") String id) throws EmptyRequestException {
+	public ResponseEntity<Map<String, String>> delete(@PathVariable("id") String id) throws EmptyRequestException {
 
 		log.info("Cancel a bankslip with id " + id);
 		getService().cancel(id);
 
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		Map<String, String> message = new HashMap<>();
+		message.put("message", "Bankslip canceled");
+
+		return new ResponseEntity<>(message, HttpStatus.NO_CONTENT);
 	}
 
 }

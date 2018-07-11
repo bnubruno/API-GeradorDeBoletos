@@ -21,7 +21,6 @@ public interface BankSlipMapper extends EntityMapper<BankSlipDTO, BankSlip> {
 		}
 		return LocalDate.parse(dueDate);
 	}
-	
 
 	@Mappings({ //
 			@Mapping(source = "dueDate", target = "due_date"), //

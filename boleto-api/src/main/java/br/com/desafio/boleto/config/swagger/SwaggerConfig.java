@@ -19,17 +19,17 @@ public class SwaggerConfig {
 	@Bean
 	public Docket apis() {
 		return new Docket(DocumentationType.SWAGGER_2) //
-				.select().apis(RequestHandlerSelectors.basePackage("br.com.desafio.boleto")).paths(PathSelectors.any()).build().apiInfo(apiInfo());
+				.select().apis(RequestHandlerSelectors.basePackage("br.com.desafio.boleto")).paths(PathSelectors.any()).build().apiInfo(apiInfo()).useDefaultResponseMessages(false);
 	}
 
 	private ApiInfo apiInfo() {
 		return new ApiInfo(//
-				"Desafio Conta Azul - Boletos", //
+				"Desafio - Boletos", //
 				"Um gerador de boletos", "0.0.1", //
 				"Termos de licensa de uso de software", //
 				null, //
-				"https://contaazul.com/", //
-				"https://contaazul.com/", //
+				"https://br.com.desafio/", //
+				"https://br.com.desafio/", //
 				new ArrayList<>());
 	}
 
