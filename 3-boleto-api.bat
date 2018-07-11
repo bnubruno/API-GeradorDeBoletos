@@ -1,5 +1,5 @@
 @echo off
-cd desafio-api
+cd boleto-api
 call gradle build
 cd ..\
 if "%1" == "all" start cmd /k  4-desafio-gateway.bat all

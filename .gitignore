@@ -26,3 +26,5 @@ dist/
 nbdist/
 .nb-gradle/
 boleto-api/bin/
+desafio-base/bin/main/br/com/desafio/repository/AbstractCrudRespository.class
+desafio-base/bin/
