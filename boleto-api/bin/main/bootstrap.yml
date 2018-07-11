@@ -1,5 +1,0 @@
-spring:
-  application:
-    name: boleto-api
-  profiles:
-    active: dev
