@@ -16,7 +16,7 @@ public class PayBankslipParam {
 	private LocalDate paymentDate;
 
 	public void validate() throws EmptyRequestException {
-		if (Stream.of(idBankslip, paymentDate).allMatch(Objects::isNull)) {
+		if (Stream.of(idBankslip, paymentDate).anyMatch(Objects::isNull)) {
 			throw new EmptyRequestException("Bankslip not found with the specified id");
 		}
 	}

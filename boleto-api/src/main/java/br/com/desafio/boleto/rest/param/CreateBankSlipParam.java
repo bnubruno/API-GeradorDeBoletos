@@ -21,7 +21,7 @@ public class CreateBankSlipParam {
 	private Customer customer;
 
 	public void validate() throws InvalidObjectException {
-		if (Stream.of(dueDate, customer, totalInCents).allMatch(Objects::isNull)) {
+		if (Stream.of(dueDate, customer, totalInCents).anyMatch(Objects::isNull)) {
 			throw new InvalidObjectException("Bankslip not provided in the request body");
 		}
 	}

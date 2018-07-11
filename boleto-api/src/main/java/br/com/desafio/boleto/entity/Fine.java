@@ -18,7 +18,7 @@ public class Fine {
 			return value.multiply(new BigDecimal("0.005").multiply(days));
 		}
 
-		return value.multiply(new BigDecimal("0.01"));
+		return value.multiply(new BigDecimal("0.01").multiply(days));
 	}
 
 }

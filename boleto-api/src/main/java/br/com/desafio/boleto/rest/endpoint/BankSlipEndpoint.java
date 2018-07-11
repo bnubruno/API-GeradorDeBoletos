@@ -73,7 +73,7 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 		if (createBankSlipDTO.isNull()) {
 			throw new EmptyRequestException("Bankslip not provided in the request body");
 		}
-		BankSlip bankSlipSaved = getService().save(this.paramMapper.toEntity(createBankSlipDTO));
+		BankSlip bankSlipSaved = getService().create(this.paramMapper.toEntity(createBankSlipDTO));
 		log.info("Bankslip successfully saved");
 
 		return new ResponseEntity<BankSlipDTO>(getMapper().toDto(bankSlipSaved), HttpStatus.CREATED);

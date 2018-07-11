@@ -28,7 +28,7 @@ public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, Ban
 	 * @return {@link BankSlip}
 	 * @throws InvalidObjectException
 	 */
-	public BankSlip save(CreateBankSlipParam createParam) throws InvalidObjectException {
+	public BankSlip create(CreateBankSlipParam createParam) throws InvalidObjectException {
 		createParam.validate();
 
 		BankSlip bankSlip = createBankSlipByParam(createParam);

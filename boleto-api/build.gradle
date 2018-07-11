@@ -55,6 +55,7 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.19.0'
 }
 
 dependencyManagement {
