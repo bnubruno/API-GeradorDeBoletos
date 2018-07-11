@@ -2,6 +2,7 @@ package br.com.desafio.boleto.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +29,9 @@ public class BankSlip implements AbstractEntity<String> {
 	@NotNull
 	private LocalDate dueDate;
 
+	@Column
+	private LocalDate paymentDate;
+
 	@Column(nullable = false, scale = 16, precision = 0)
 	@NotNull
 	private BigDecimal totalInCents;
@@ -40,8 +44,8 @@ public class BankSlip implements AbstractEntity<String> {
 	@NotNull
 	private BankSlipStatus status;
 
-	public BigDecimal getFine(LocalDate actualDate) {
-		return Fine.of(this.totalInCents, this.dueDate, actualDate);
+	public BigDecimal getFine() {
+		return Fine.of(this.totalInCents, this.dueDate, Optional.ofNullable(paymentDate).orElse(LocalDate.now()));
 	}
 
 }

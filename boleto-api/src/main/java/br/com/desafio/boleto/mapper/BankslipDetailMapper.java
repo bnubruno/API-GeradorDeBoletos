@@ -26,18 +26,20 @@ public interface BankslipDetailMapper extends EntityMapper<BankSlipDetailDTO, Ba
 
 	@AfterMapping
 	default void calculateFine(BankSlip bankSlip, @MappingTarget BankSlipDetailDTO dto) {
-		dto.setFine(bankSlip.getFine(LocalDate.now()).toPlainString());
+		dto.setFine(bankSlip.getFine());
 	}
 
 	@Mappings({ //
 			@Mapping(source = "dueDate", target = "due_date"), //
 			@Mapping(source = "totalInCents", target = "total_in_cents"), //
+			@Mapping(source = "paymentDate", target = "payment_date"), //
 	})
 	public BankSlipDetailDTO toDto(BankSlip entity) throws InvalidObjectException;
 
 	@Mappings({ //
 			@Mapping(source = "total_in_cents", target = "totalInCents"), //
 			@Mapping(source = "due_date", target = "dueDate"), //
+			@Mapping(source = "payment_date", target = "paymentDate"), //
 	})
 	public BankSlip toEntity(BankSlipDetailDTO dto) throws InvalidObjectException;
 

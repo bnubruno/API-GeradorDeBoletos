@@ -1,5 +1,7 @@
 package br.com.desafio.boleto.dto;
 
+import java.math.BigDecimal;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -7,6 +9,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class BankSlipDetailDTO extends BankSlipDTO {
 
-	private String fine;
+	private BigDecimal fine;
+
+	private String payment_date;
 
 }

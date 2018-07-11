@@ -1,6 +1,7 @@
 package br.com.desafio.boleto.entity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -15,10 +16,10 @@ public class Fine {
 		}
 
 		if (days.compareTo(new BigDecimal(10)) <= 0) {
-			return value.multiply(new BigDecimal("0.005").multiply(days));
+			return value.multiply(new BigDecimal("0.005").multiply(days)).setScale(0, RoundingMode.HALF_EVEN);
 		}
 
-		return value.multiply(new BigDecimal("0.01").multiply(days));
+		return value.multiply(new BigDecimal("0.01").multiply(days)).setScale(0, RoundingMode.HALF_EVEN);
 	}
 
 }
