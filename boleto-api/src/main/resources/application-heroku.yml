@@ -1,0 +1,40 @@
+spring:
+  config:
+    enabled: false
+  cloud:
+    discovery:
+      enabled: false
+eureka:
+  client:
+    enabled: false
+    registerWithEureka: false
+    fetchRegistry: false
+  datasource:
+    url: jdbc:h2:mem:boleto;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
+management:
+  security:
+    enabled: false
+server:
+  servlet:
+    context-path: /rest
+  port: ${PORT:8080}

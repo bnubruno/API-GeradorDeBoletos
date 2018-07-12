@@ -2,4 +2,4 @@ spring:
   application:
     name: boleto-api
   profiles:
-    active: heroku
+    active: prod
