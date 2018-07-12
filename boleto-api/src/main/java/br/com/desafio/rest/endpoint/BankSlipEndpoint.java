@@ -44,14 +44,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Api("Bankslips")
-@Getter
-@Slf4j
 @RequestMapping("/bankslips")
 @RestController
+@Slf4j
 public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, BankSlipMapper, BankSlipService, String> {
 
 	@Autowired
@@ -73,7 +71,6 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	})
 	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<BankSlipDTO> create(@RequestBody CreateBankSlipDTO createBankSlipDTO) throws InvalidObjectException, EmptyRequestException {
-
 		log.info("Creating a bankslip " + createBankSlipDTO.toString());
 		if (createBankSlipDTO.isNull()) {
 			throw new EmptyRequestException("Bankslip not provided in the request body");
@@ -89,7 +86,7 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 			@ApiResponse(code = 200, message = "OK") 
 	})
 	@GetMapping(value = "/hateoas", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Resources<BankSlipResource>> listHateoas(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
+	public ResponseEntity<Resources<BankSlipResource>> getHateoas(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
 		log.info("Fetch a lista of bankslips");
 		Page<BankSlip> bankSlipsPage = getService().findAll(PageRequest.of(page, size));
 		final List<BankSlipResource> collection = getMapper().toDto(bankSlipsPage.getContent()).stream().map(BankSlipResource::new).collect(Collectors.toList());
@@ -102,7 +99,7 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 			@ApiResponse(code = 200, message = "OK") 
 	})
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<BankSlipDTO>> list(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
+	public ResponseEntity<List<BankSlipDTO>> get(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
 		log.info("Fetch a lista of bankslips");
 		Page<BankSlip> bankSlipsPage = getService().findAll(PageRequest.of(page, size));
 		return ResponseEntity.ok(getMapper().toDto(bankSlipsPage.getContent()));
@@ -121,10 +118,10 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 			@ApiResponse(code = 404, message = "Bankslip not found with the specified id")
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<BankSlipDTO> detail(@PathVariable("id") String id) throws APIException {
+	public ResponseEntity<BankSlipDTO> get(@PathVariable("id") String id) throws APIException {
 		log.info("Find a bankslip by id " + id);
 		BankSlip bankslip = getService().findById(id).orElseThrow(() -> new NoResultException("Bankslip not found with the specified id"));
-		return ResponseEntity.ok(getDetailMapper().toDto(bankslip));
+		return ResponseEntity.ok(this.detailMapper.toDto(bankslip));
 	}
 
 	@ApiOperation(value = "Recebe o pagamento de um boleto")
@@ -134,7 +131,7 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 			@ApiResponse(code = 404, message = "Bankslip not found with the specified id")
 	})
 	@PostMapping(value = "/{id}/payments", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Void> pay(@PathVariable("id") String idBankslip, @RequestParam(value = "payment_date") String paymentDateStr) throws InvalidObjectException, EmptyRequestException {
+	public ResponseEntity<Void> post(@PathVariable("id") String idBankslip, @RequestParam(value = "payment_date") String paymentDateStr) throws InvalidObjectException, EmptyRequestException {
 		LocalDate paymentDate = Util.toLocalDate(paymentDateStr).orElseThrow(() -> new EmptyRequestException("Payment date not provided in the request body"));
 
 		log.info("Pay a bankslip by id " + idBankslip + " in " + paymentDateStr);

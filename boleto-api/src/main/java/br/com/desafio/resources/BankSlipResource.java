@@ -25,11 +25,11 @@ public class BankSlipResource extends ResourceSupport {
 		this.bankslip = dto;
 		try {
 			add(linkTo(BankSlipEndpoint.class).withRel("bankslip"));
-			add(linkTo(methodOn(BankSlipEndpoint.class).detail(dto.getId())).withSelfRel());
-			add(linkTo(methodOn(BankSlipEndpoint.class).pay(dto.getId(), Util.toString(LocalDate.now()))).withRel("payment"));
+			add(linkTo(methodOn(BankSlipEndpoint.class).get(dto.getId())).withSelfRel());
+			add(linkTo(methodOn(BankSlipEndpoint.class).post(dto.getId(), Util.toString(LocalDate.now()))).withRel("payment"));
 			add(linkTo(methodOn(BankSlipEndpoint.class).delete(dto.getId())).withRel("cancel"));
 		} catch (APIException | EmptyRequestException e) {
-			e.printStackTrace();
+			log.error("Error to create resource", e);
 		}
 	}
 
