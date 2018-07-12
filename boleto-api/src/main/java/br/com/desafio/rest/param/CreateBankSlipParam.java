@@ -24,7 +24,7 @@ public class CreateBankSlipParam {
 
 	public void validate() throws InvalidObjectException {
 		if (Stream.of(dueDate, customer, totalInCents).anyMatch(Objects::isNull) || StringUtils.isEmpty(customer.getName())) {
-			throw new InvalidObjectException("Bankslip not provided in the request body");
+			throw new InvalidObjectException("Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values");
 		}
 	}
 

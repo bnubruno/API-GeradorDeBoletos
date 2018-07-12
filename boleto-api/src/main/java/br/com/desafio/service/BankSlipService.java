@@ -44,10 +44,14 @@ public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, Ban
 	 * @return
 	 * @throws EmptyRequestException
 	 */
-	public BankSlip pay(PayBankslipParam payParam) {
+	public BankSlip pay(PayBankslipParam payParam) throws EmptyRequestException {
 		payParam.validate();
 
-		return changeStatusTo(payParam.getIdBankslip(), BankSlipStatus.PAID);
+		BankSlip bankSlip = findById(payParam.getIdBankslip()).orElseThrow(() -> new NoResultException("Bankslip not found with the specified id"));
+		bankSlip.setStatus(BankSlipStatus.PAID);
+		bankSlip.setPaymentDate(payParam.getPaymentDate());
+		
+		return save(bankSlip);
 	}
 
 	/**
@@ -58,7 +62,6 @@ public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, Ban
 	 * @throws EmptyRequestException
 	 */
 	public BankSlip cancel(String idBankslip) throws NoResultException {
-
 		return changeStatusTo(idBankslip, BankSlipStatus.CANCELED);
 	}
 
