@@ -28,7 +28,7 @@ import br.com.desafio.service.BankSlipService;
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BankslipServiceTest {
+public class BankSlipServiceTest {
 
 	@Autowired
 	private BankSlipService bankSlipService;

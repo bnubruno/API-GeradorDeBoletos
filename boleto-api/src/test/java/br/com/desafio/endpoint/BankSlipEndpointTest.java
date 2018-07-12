@@ -41,7 +41,7 @@ import br.com.desafio.service.BankSlipService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
-public class BankslipEndpointTest {
+public class BankSlipEndpointTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -54,7 +54,7 @@ public class BankslipEndpointTest {
 
 	@Test
 	@Transactional
-	public void givenBankslips_whenGetAndHaveTwoBankSlips_thenReturnTwoBankSlips() throws Exception {
+	public void givenBankSlips_whenGetAndHaveTwoBankSlips_thenReturnTwoBankSlips() throws Exception {
 		this.service.save(getOne());
 		this.service.save(getTwo());
 
@@ -75,13 +75,13 @@ public class BankslipEndpointTest {
 
 	@Test
 	@Transactional
-	public void givenBankslips_whenHaveNoBankslips_thenReturnZeroBankSlips() throws Exception {
+	public void givenBankSlips_whenHaveNoBankSlips_thenReturnZeroBankSlips() throws Exception {
 		mvc.perform(get("/bankslips").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(0)));
 	}
 
 	@Test
 	@Transactional
-	public void givenBankSlip_whengetBankslipAndExits_thenReturnBankSlipDetail() throws Exception {
+	public void givenBankSlip_whengetBankSlipAndExits_thenReturnBankSlipDetail() throws Exception {
 		this.service.save(getOther());
 
 		ResultActions perform = mvc.perform(get("/bankslips/" + "c2dbd236-3fa5-4ccc-9c12-bd0ae1d6dd89").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isOk());
@@ -97,7 +97,7 @@ public class BankslipEndpointTest {
 
 	@Test
 	@Transactional
-	public void givenBankSlip_whenGetBankslipAndNotExits_thenReturnStatus404() {
+	public void givenBankSlip_whenGetBankSlipAndNotExits_thenReturnStatus404() {
 		try {
 			mvc.perform(get("/bankslips/" + "c2dbd236-3fa5-4ccc-9c12-bd0ae1d6dd89").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isNotFound());
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class BankslipEndpointTest {
 
 	@Test
 	@Transactional
-	public void givenCancelBankSlip_whenStatusIsPending_thenCancelBankslip() throws Exception {
+	public void givenCancelBankSlip_whenStatusIsPending_thenCancelBankSlip() throws Exception {
 		BankSlip thisOne = getOther();
 		this.service.save(thisOne);
 
@@ -135,7 +135,7 @@ public class BankslipEndpointTest {
 
 	@Test
 	@Transactional
-	public void givenCancelBankSlip_whenIdNotExists_thenCancelBankslip() {
+	public void givenCancelBankSlip_whenIdNotExists_thenCancelBankSlip() {
 		try {
 			mvc.perform(delete("/bankslips/" + "NOTEXISTISID").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isNotFound());
 		} catch (Exception e) {
