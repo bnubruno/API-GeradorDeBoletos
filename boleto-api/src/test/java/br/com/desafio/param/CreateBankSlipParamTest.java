@@ -37,7 +37,7 @@ public class CreateBankSlipParamTest {
 			param.validate();
 			assertFalse("Exception expected", true);
 		} catch (InvalidObjectException e) {
-			assertThat(e).hasMessage("Bankslip not provided in the request body");
+			assertThat(e).hasMessage("Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values");
 		}
 	}
 

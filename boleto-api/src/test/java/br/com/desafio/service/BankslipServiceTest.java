@@ -69,7 +69,7 @@ public class BankslipServiceTest {
 		try {
 			this.bankSlipService.pay(param);
 			assertFalse("Exception expected", true);
-		} catch (EmptyRequestException e) {
+		} catch (NoResultException | EmptyRequestException e) {
 			assertThat(e).hasMessage("Bankslip not found with the specified id");
 		}
 	}
