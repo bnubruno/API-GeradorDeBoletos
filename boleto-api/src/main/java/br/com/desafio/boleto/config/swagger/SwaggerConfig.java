@@ -25,11 +25,12 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo() {
 		return new ApiInfo(//
 				"Desafio - Boletos", //
-				"Um gerador de boletos", "0.0.1", //
+				"API Rest para geração de boletos", 
+				"1.0.0", //
 				"Termos de licensa de uso de software", //
 				null, //
-				"https://br.com.desafio/", //
-				"https://br.com.desafio/", //
+				"https://github.com/bnubruno/desafio", //
+				"/", //
 				new ArrayList<>());
 	}
 

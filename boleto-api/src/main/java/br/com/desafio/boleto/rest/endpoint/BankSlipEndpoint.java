@@ -66,10 +66,10 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	}
 
 	@ApiOperation(value = "Recebe um boleto")
-	@ApiResponses(value = { //
-			@ApiResponse(code = 201, message = "Bankslip created"), //
-			@ApiResponse(code = 400, message = "Bankslip not provided in the request body"), //
-			@ApiResponse(code = 422, message = "Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values"), //
+	@ApiResponses(value = { 
+			@ApiResponse(code = 201, message = "Bankslip created"), 
+			@ApiResponse(code = 400, message = "Bankslip not provided in the request body"), 
+			@ApiResponse(code = 422, message = "Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values")
 	})
 	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<BankSlipDTO> create(@RequestBody CreateBankSlipDTO createBankSlipDTO) throws InvalidObjectException, EmptyRequestException {
@@ -85,8 +85,8 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	}
 
 	@ApiOperation(value = "Retorna uma lista de boletos (HATEOAS)")
-	@ApiResponses(value = { //
-			@ApiResponse(code = 200, message = "OK") //
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "OK") 
 	})
 	@GetMapping(value = "/hateoas", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Resources<BankSlipResource>> listHateoas(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
@@ -98,8 +98,8 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	}
 
 	@ApiOperation(value = "Retorna uma lista de boletos)")
-	@ApiResponses(value = { //
-			@ApiResponse(code = 200, message = "OK") //
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "OK") 
 	})
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<BankSlipDTO>> list(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "9999") Integer size) throws APIException {
@@ -116,23 +116,22 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	}
 
 	@ApiOperation(value = "Retorna o boleto pelo ID")
-	@ApiResponses(value = { //
-			@ApiResponse(code = 200, message = "Ok"), //
-			@ApiResponse(code = 404, message = "Bankslip not found with the specified id"), //
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Ok"), 
+			@ApiResponse(code = 404, message = "Bankslip not found with the specified id")
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<BankSlipDTO> detail(@PathVariable("id") String id) throws APIException {
-
 		log.info("Find a bankslip by id " + id);
 		BankSlip bankslip = getService().findById(id).orElseThrow(() -> new NoResultException("Bankslip not found with the specified id"));
 		return ResponseEntity.ok(getDetailMapper().toDto(bankslip));
 	}
 
 	@ApiOperation(value = "Recebe o pagamento de um boleto")
-	@ApiResponses(value = { //
-			@ApiResponse(code = 204, message = "No content"), //
-			@ApiResponse(code = 400, message = "Payment date not provided in the request body"), //
-			@ApiResponse(code = 404, message = "Bankslip not found with the specified id"), //
+	@ApiResponses(value = { 
+			@ApiResponse(code = 204, message = "No content"), 
+			@ApiResponse(code = 400, message = "Payment date not provided in the request body"), 
+			@ApiResponse(code = 404, message = "Bankslip not found with the specified id")
 	})
 	@PostMapping(value = "/{id}/payments", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> pay(@PathVariable("id") String idBankslip, @RequestParam(value = "payment_date") String paymentDateStr) throws InvalidObjectException, EmptyRequestException {
@@ -145,19 +144,17 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	}
 
 	@ApiOperation(value = "Recebe o cancelamento de um boleto")
-	@ApiResponses(value = { //
-			@ApiResponse(code = 204, message = "No content"), //
-			@ApiResponse(code = 404, message = "Bankslip not found with the specified id"), //
+	@ApiResponses(value = { 
+			@ApiResponse(code = 204, message = "No content"), 
+			@ApiResponse(code = 404, message = "Bankslip not found with the specified id")
 	})
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, String>> delete(@PathVariable("id") String id) throws EmptyRequestException {
-
 		log.info("Cancel a bankslip with id " + id);
 		getService().cancel(id);
 
 		Map<String, String> message = new HashMap<>();
 		message.put("message", "Bankslip canceled");
-
 		return new ResponseEntity<>(message, HttpStatus.NO_CONTENT);
 	}
 
