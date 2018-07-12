@@ -11,7 +11,7 @@ import br.com.desafio.exception.EmptyRequestException;
 import br.com.desafio.exception.InvalidObjectException;
 import br.com.desafio.repository.BankSlipRepository;
 import br.com.desafio.rest.param.CreateBankSlipParam;
-import br.com.desafio.rest.param.PayBankslipParam;
+import br.com.desafio.rest.param.PayBankSlipParam;
 
 @Service
 public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, BankSlip, String> {
@@ -44,7 +44,7 @@ public class BankSlipService extends AbstractServiceImpl<BankSlipRepository, Ban
 	 * @return
 	 * @throws EmptyRequestException
 	 */
-	public BankSlip pay(PayBankslipParam payParam) throws EmptyRequestException {
+	public BankSlip pay(PayBankSlipParam payParam) throws EmptyRequestException {
 		payParam.validate();
 
 		BankSlip bankSlip = findById(payParam.getIdBankslip()).orElseThrow(() -> new NoResultException("Bankslip not found with the specified id"));

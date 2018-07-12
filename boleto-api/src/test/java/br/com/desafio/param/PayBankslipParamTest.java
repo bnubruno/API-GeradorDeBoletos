@@ -9,13 +9,13 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import br.com.desafio.exception.EmptyRequestException;
-import br.com.desafio.rest.param.PayBankslipParam;
+import br.com.desafio.rest.param.PayBankSlipParam;
 
 public class PayBankslipParamTest {
 
 	@Test
 	public void givenPayParam_whenParamIsOk_thenReturnOK() throws EmptyRequestException {
-		PayBankslipParam param = new PayBankslipParam("123456", LocalDate.of(2018, 1, 1));
+		PayBankSlipParam param = new PayBankSlipParam("123456", LocalDate.of(2018, 1, 1));
 
 		param.validate();
 
@@ -25,7 +25,7 @@ public class PayBankslipParamTest {
 	@Test
 	public void givenPayParam_whenPayParamHasNoId_thenReturnIdNotFound() {
 		try {
-			PayBankslipParam param = new PayBankslipParam(null, LocalDate.of(2018, 1, 1));
+			PayBankSlipParam param = new PayBankSlipParam(null, LocalDate.of(2018, 1, 1));
 			param.validate();
 			assertFalse(true);
 		} catch (EmptyRequestException e) {

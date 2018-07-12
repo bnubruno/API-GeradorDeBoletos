@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.com.desafio.exception.InvalidObjectException;
 import br.com.desafio.mapper.BankSlipMapper;
 import br.com.desafio.mapper.CreateBankSlipMapper;
-import br.com.desafio.mapper.DetailBankslipMapper;
+import br.com.desafio.mapper.DetailBankSlipMapper;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
@@ -29,7 +29,7 @@ public class MapperTests {
 	public CreateBankSlipMapper createBankSlipMapper;
 
 	@Autowired
-	public DetailBankslipMapper detailBankslipMapper;
+	public DetailBankSlipMapper detailBankslipMapper;
 
 	@Test
 	public void givenStringDateToBankSlipMapper_whenCorretDate_thenLocalDate() throws InvalidObjectException {

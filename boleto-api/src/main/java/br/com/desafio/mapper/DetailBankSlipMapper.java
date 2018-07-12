@@ -16,7 +16,7 @@ import br.com.desafio.mapper.EntityMapper;
 import br.com.desafio.util.Util;
 
 @Mapper(componentModel = "spring", uses = { CustomerMapper.class })
-public interface DetailBankslipMapper extends EntityMapper<BankSlipDetailDTO, BankSlip> {
+public interface DetailBankSlipMapper extends EntityMapper<BankSlipDetailDTO, BankSlip> {
 
 	default LocalDate toDueDate(String dueDate) throws InvalidObjectException {
 		if (StringUtils.isEmpty(dueDate)) {

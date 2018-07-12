@@ -22,7 +22,7 @@ import br.com.desafio.entity.Customer;
 import br.com.desafio.exception.EmptyRequestException;
 import br.com.desafio.exception.InvalidObjectException;
 import br.com.desafio.rest.param.CreateBankSlipParam;
-import br.com.desafio.rest.param.PayBankslipParam;
+import br.com.desafio.rest.param.PayBankSlipParam;
 import br.com.desafio.service.BankSlipService;
 
 @ActiveProfiles("test")
@@ -56,7 +56,7 @@ public class BankslipServiceTest {
 	public void givenParam_wheParamIsOk_thenPayBankSlip() throws InvalidObjectException, EmptyRequestException {
 		BankSlip saved = createAndAssert();
 
-		PayBankslipParam param = new PayBankslipParam(saved.getId(), LocalDate.of(2018, 1, 1));
+		PayBankSlipParam param = new PayBankSlipParam(saved.getId(), LocalDate.of(2018, 1, 1));
 		BankSlip paid = this.bankSlipService.pay(param);
 
 		assertWithStatus(saved, paid.getId(), saved.getCustomer(), saved.getTotalInCents(), saved.getDueDate(), BankSlipStatus.PAID);
@@ -65,7 +65,7 @@ public class BankslipServiceTest {
 	@Test
 	@Transactional
 	public void givenParam_whereIdNotExists_givenNotFoundError() throws InvalidObjectException {
-		PayBankslipParam param = new PayBankslipParam("NOTEXISTSID", LocalDate.of(2018, 1, 1));
+		PayBankSlipParam param = new PayBankSlipParam("NOTEXISTSID", LocalDate.of(2018, 1, 1));
 		try {
 			this.bankSlipService.pay(param);
 			assertFalse("Exception expected", true);

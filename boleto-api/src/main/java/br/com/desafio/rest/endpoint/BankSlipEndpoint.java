@@ -35,9 +35,9 @@ import br.com.desafio.exception.EmptyRequestException;
 import br.com.desafio.exception.InvalidObjectException;
 import br.com.desafio.mapper.BankSlipMapper;
 import br.com.desafio.mapper.CreateBankSlipMapper;
-import br.com.desafio.mapper.DetailBankslipMapper;
+import br.com.desafio.mapper.DetailBankSlipMapper;
 import br.com.desafio.resources.BankSlipResource;
-import br.com.desafio.rest.param.PayBankslipParam;
+import br.com.desafio.rest.param.PayBankSlipParam;
 import br.com.desafio.service.BankSlipService;
 import br.com.desafio.util.Util;
 import io.swagger.annotations.Api;
@@ -56,7 +56,7 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 	private CreateBankSlipMapper paramMapper;
 
 	@Autowired
-	private DetailBankslipMapper detailMapper;
+	private DetailBankSlipMapper detailMapper;
 
 	@Autowired
 	public BankSlipEndpoint(BankSlipService service, BankSlipMapper mapper) {
@@ -135,7 +135,7 @@ public class BankSlipEndpoint extends AbstractEndpoint<BankSlip, BankSlipDTO, Ba
 		LocalDate paymentDate = Util.toLocalDate(paymentDateStr).orElseThrow(() -> new EmptyRequestException("Payment date not provided in the request body"));
 
 		log.info("Pay a bankslip by id " + idBankslip + " in " + paymentDateStr);
-		getService().pay(new PayBankslipParam(idBankslip, paymentDate));
+		getService().pay(new PayBankSlipParam(idBankslip, paymentDate));
 
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

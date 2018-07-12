@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PayBankslipParam {
+public class PayBankSlipParam {
 
 	private String idBankslip;
 	private LocalDate paymentDate;
