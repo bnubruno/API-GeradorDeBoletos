@@ -1,3 +1,4 @@
+
 # Desafio - Gerador de Boletos!
 
 O **objetivo** do desafio é construir uma API REST para geração de boletos que será consumido por
@@ -10,11 +11,11 @@ No final do desafio vamos ter os seguintes **endpoints** para:
  - Pagar um boleto
  - Cancelar um boleto
 
-# Getting Started
+# Começando
 
 ## Pré requisitos
-- Java 8
-- Gradle 4.8 ou superior
+- [Java](https://java.com/pt_BR/download/) 8
+- [Gradle](https://gradle.org/) 4.8 ou superior
 
 ## Iniciando a aplicação
 
@@ -26,10 +27,47 @@ A implementação deste desafio foi dividido em 5 grandes projetos, são eles:
  - desafio-gateway
  - desafio-base
 
-Cada um precisa ser executado na sua ordem.
-
 Para iniciar todos os projetos de uma única vez basta apenas executar o arquivo `run-all.bat` que fica na pasta raiz.
 
+### Iniciando manualmente
+
+#### Config:
+
+    cd desafio-config
+    call gradle build
+    call java -jar "build/libs/desafio-config-0.0.1-SNAPSHOT.jar"
+
+ou
+
+    run-config.bat
+
+#### Eureka
+
+    cd desafio-eureka
+    call gradle build
+    call java -jar "build/libs/desafio-eureka-0.0.1-SNAPSHOT.jar"
+ou
+
+    run-eureka.bat
+
+#### API
+
+    cd boleto-api
+    call gradle build
+    call java -jar "build/libs/boleto-api-0.0.1-SNAPSHOT.jar"
+ou
+
+    run-api.bat
+
+#### Gateway
+
+	cd desafio-gateway
+    call gradle build
+    call java -jar "build/libs/desafio-gateway-0.0.1-SNAPSHOT.jar"
+   ou
+   
+    run-gateway.bat
+    
 ## Arquivos de configuração
 
 Todos os arquivos de configuração ficam no projeto `desafio-config`.
@@ -42,3 +80,17 @@ Todos os arquivos de configuração ficam no projeto `desafio-config`.
 | desafio-eureka| 8761
 | desafio-gateway| 8080
 | boleto-api | 8780
+
+# Testes
+
+Total de testes: 32
+
+![Testes automatizados](https://imagemhost.com.br/images/2018/07/11/image.png)
+
+# Documentação
+
+## Swagger
+
+http://localhost:8080/rest/swagger-ui.html
+
+![Documentação da API com Swagger](https://www.imagemhost.com.br/images/2018/07/11/swagger.png)

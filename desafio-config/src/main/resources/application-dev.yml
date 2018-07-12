@@ -1,3 +1,0 @@
-services:
-  eureka:
-    url: http://localhost:8761/eureka

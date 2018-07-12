@@ -3,12 +3,10 @@ package br.com.desafio.boleto.dto;
 import java.math.BigDecimal;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class BankSlipDTO {
 

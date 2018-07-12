@@ -1,0 +1,13 @@
+spring:
+  config:
+    enabled: false
+  cloud:
+    discovery:
+      enabled: false
+eureka:
+  client:
+    enabled: false
+    registerWithEureka: false
+    fetchRegistry: false
+server:
+  port: 8761

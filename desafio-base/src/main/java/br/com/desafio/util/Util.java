@@ -1,8 +1,10 @@
 package br.com.desafio.util;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Util {
 
@@ -12,13 +14,16 @@ public class Util {
 		return list;
 	}
 
-	public static LocalDate toLocalDate(String str) {
+	public static Optional<LocalDate> toLocalDate(String str) {
 		try {
-			return LocalDate.parse(str);
+			return Optional.ofNullable(LocalDate.parse(str));
 		} catch (Exception e) {
-			// Like a ninja ;)
-			return null;
+			return Optional.ofNullable(null);
 		}
+	}
+
+	public static String toString(LocalDate date) {
+		return DateTimeFormatter.ISO_LOCAL_DATE.format(date);
 	}
 
 }

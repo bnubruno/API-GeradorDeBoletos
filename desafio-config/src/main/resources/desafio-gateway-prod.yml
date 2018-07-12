@@ -1,6 +1,11 @@
 spring:
   application:
     name: desafio-gateway
+  config:
+    enabled: false
+  cloud:
+    discovery:
+      enabled: false
 server:
   port: 8080
 zuul:

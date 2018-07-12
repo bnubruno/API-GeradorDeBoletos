@@ -2,4 +2,4 @@ spring:
   application:
     name: desafio-eureka
   profiles:
-    active: dev
+    active: prod

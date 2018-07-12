@@ -19,6 +19,7 @@ public class CreateBankSlipDTO {
 	@ApiModelProperty(value = "Cliente", example = "Trillian Company", required = true)
 	private String customer;
 
+	@ApiModelProperty(hidden = true)
 	public boolean isNull() {
 		return Stream.of(due_date, total_in_cents, customer).allMatch(Objects::isNull);
 	}

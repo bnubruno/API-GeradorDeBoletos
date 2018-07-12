@@ -11,15 +11,16 @@ import br.com.desafio.boleto.dto.CreateBankSlipDTO;
 import br.com.desafio.boleto.exception.InvalidObjectException;
 import br.com.desafio.boleto.rest.param.CreateBankSlipParam;
 import br.com.desafio.mapper.EntityMapper;
+import br.com.desafio.util.Util;
 
 @Mapper(componentModel = "spring", uses = { CustomerMapper.class })
-public interface BankSlipParamMapper extends EntityMapper<CreateBankSlipDTO, CreateBankSlipParam> {
+public interface CreateBankSlipMapper extends EntityMapper<CreateBankSlipDTO, CreateBankSlipParam> {
 
 	default LocalDate toDueDate(String dueDate) throws InvalidObjectException {
 		if (StringUtils.isEmpty(dueDate)) {
 			throw new InvalidObjectException("Bankslip not provided in the request body");
 		}
-		return LocalDate.parse(dueDate);
+		return Util.toLocalDate(dueDate).orElseThrow(() -> new InvalidObjectException("Bankslip not provided in the request body"));
 	}
 
 	@Mappings({ //

@@ -2,4 +2,4 @@ spring:
   application:
     name: desafio-gateway
   profiles:
-    active: dev
+    active: prod

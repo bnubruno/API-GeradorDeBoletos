@@ -1,9 +1,12 @@
 package br.com.desafio.boleto.param;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.desafio.boleto.entity.Customer;
@@ -22,23 +25,20 @@ public class CreateBankSlipParamTest {
 
 		param.validate();
 
-		Assert.assertTrue(true);
+		assertTrue(true);
 	}
 
 	@Test
 	public void givenCreateParam_whenParaHasNoCustomer_thenReturnInvalidObjectError() {
-		CreateBankSlipParam param = new CreateBankSlipParam();
-		param.setDueDate(LocalDate.of(2018, 1, 1));
-		param.setTotalInCents(new BigDecimal(99000));
-
 		try {
+			CreateBankSlipParam param = new CreateBankSlipParam();
+			param.setDueDate(LocalDate.of(2018, 1, 1));
+			param.setTotalInCents(new BigDecimal(99000));
 			param.validate();
+			assertFalse("Exception expected", true);
 		} catch (InvalidObjectException e) {
-			Assert.assertTrue(true);
-			Assert.assertEquals("Bankslip not provided in the request body", e.getMessage());
-			return;
+			assertThat(e).hasMessage("Bankslip not provided in the request body");
 		}
-		Assert.assertFalse(true);
 	}
 
 	@Test
@@ -46,11 +46,10 @@ public class CreateBankSlipParamTest {
 		CreateBankSlipParam param = new CreateBankSlipParam();
 		try {
 			param.validate();
+			assertFalse("Exception expected", true);
 		} catch (InvalidObjectException e) {
-			Assert.assertTrue(true);
-			return;
+			assertTrue(true);
 		}
-		Assert.assertFalse(true);
 	}
 
 }

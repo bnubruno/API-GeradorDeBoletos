@@ -1,8 +1,11 @@
 package br.com.desafio.boleto.param;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.time.LocalDate;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.desafio.boleto.exception.EmptyRequestException;
@@ -16,19 +19,18 @@ public class PayBankslipParamTest {
 
 		param.validate();
 
-		Assert.assertTrue(true);
+		assertTrue(true);
 	}
 
 	@Test
 	public void givenPayParam_whenPayParamHasNoId_thenReturnIdNotFound() {
-		PayBankslipParam param = new PayBankslipParam(null, LocalDate.of(2018, 1, 1));
 		try {
+			PayBankslipParam param = new PayBankslipParam(null, LocalDate.of(2018, 1, 1));
 			param.validate();
+			assertFalse(true);
 		} catch (EmptyRequestException e) {
-			Assert.assertEquals("Bankslip not found with the specified id", e.getMessage());
-			return;
+			assertThat(e).hasMessage("Bankslip not found with the specified id");
 		}
-		Assert.assertFalse(true);
 	}
 
 }

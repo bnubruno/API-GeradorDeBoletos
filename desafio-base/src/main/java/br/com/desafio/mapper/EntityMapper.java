@@ -1,16 +1,9 @@
-/**
- *
- */
 package br.com.desafio.mapper;
 
 import java.util.List;
 
 import br.com.desafio.config.exception.APIException;
 
-/**
- * @author brmsouza
- *
- */
 public interface EntityMapper<D, E> {
 
 	public D toDto(E entity) throws APIException;

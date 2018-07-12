@@ -13,15 +13,16 @@ import br.com.desafio.boleto.dto.BankSlipDetailDTO;
 import br.com.desafio.boleto.entity.BankSlip;
 import br.com.desafio.boleto.exception.InvalidObjectException;
 import br.com.desafio.mapper.EntityMapper;
+import br.com.desafio.util.Util;
 
 @Mapper(componentModel = "spring", uses = { CustomerMapper.class })
-public interface BankslipDetailMapper extends EntityMapper<BankSlipDetailDTO, BankSlip> {
+public interface DetailBankslipMapper extends EntityMapper<BankSlipDetailDTO, BankSlip> {
 
 	default LocalDate toDueDate(String dueDate) throws InvalidObjectException {
 		if (StringUtils.isEmpty(dueDate)) {
 			throw new InvalidObjectException("Bankslip not provided in the request body");
 		}
-		return LocalDate.parse(dueDate);
+		return Util.toLocalDate(dueDate).orElseThrow(() -> new InvalidObjectException("Bankslip not provided in the request body"));
 	}
 
 	@AfterMapping
