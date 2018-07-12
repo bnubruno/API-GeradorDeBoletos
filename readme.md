@@ -1,4 +1,5 @@
 
+
 # Desafio - Gerador de Boletos!
 
 O **objetivo** do desafio é construir uma API REST para geração de boletos que será consumido por
@@ -35,7 +36,7 @@ Para iniciar todos os projetos de uma única vez basta apenas executar o arquivo
 
     cd desafio-config
     call gradle build
-    call java -jar "build/libs/desafio-config-0.0.1-SNAPSHOT.jar"
+    call java -jar "build/libs/desafio-config-1.0.0.jar"
 
 ou
 
@@ -45,7 +46,7 @@ ou
 
     cd desafio-eureka
     call gradle build
-    call java -jar "build/libs/desafio-eureka-0.0.1-SNAPSHOT.jar"
+    call java -jar "build/libs/desafio-eureka-1.0.0.jar"
 ou
 
     run-eureka.bat
@@ -54,7 +55,7 @@ ou
 
     cd boleto-api
     call gradle build
-    call java -jar "build/libs/boleto-api-0.0.1-SNAPSHOT.jar"
+    call java -jar "build/libs/boleto-api-1.0.0.jar"
 ou
 
     run-api.bat
@@ -63,7 +64,7 @@ ou
 
 	cd desafio-gateway
     call gradle build
-    call java -jar "build/libs/desafio-gateway-0.0.1-SNAPSHOT.jar"
+    call java -jar "build/libs/desafio-gateway-1.0.0.jar"
    ou
    
     run-gateway.bat
@@ -81,6 +82,26 @@ Todos os arquivos de configuração ficam no projeto `desafio-config`.
 | desafio-gateway| 8080
 | boleto-api | 8780
 
+## Ambientes
+
+### Desenvolvimento
+
+Para utilizar a API em modo desenvolvimento:
+
+    -Dspring.profiles.active=dev
+
+### Testes
+
+Para utilizar a API em modo de testes:
+
+    -Dspring.profiles.active=test
+
+### Heroku (Simplificado)
+
+Esta aplicação foi deployada no Heroku em modo simplificado.
+
+    -Dspring.profiles.active=heroku
+
 # Testes
 
 Total de testes: 32
@@ -93,4 +114,12 @@ Total de testes: 32
 
 http://localhost:8080/rest/swagger-ui.html
 
-![Documentação da API com Swagger](https://www.imagemhost.com.br/images/2018/07/11/swagger.png)
+![Documentação da API com Swagger](https://image.ibb.co/hyTiMo/image.png)
+
+## HATEOAS
+
+A URL `/bankslips/hateoas` foi inserida para demonstrar o uso de HATEOAS.
+
+Exemplo de resposta:
+
+![enter image description here](https://image.ibb.co/eQLG7T/image.png)
