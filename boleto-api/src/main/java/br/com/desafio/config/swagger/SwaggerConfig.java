@@ -18,19 +18,19 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket apis() {
-		return new Docket(DocumentationType.SWAGGER_2) //
+		return new Docket(DocumentationType.SWAGGER_2) 
 				.select().apis(RequestHandlerSelectors.basePackage("br.com.desafio")).paths(PathSelectors.any()).build().apiInfo(apiInfo()).useDefaultResponseMessages(false);
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfo(//
-				"Desafio - Boletos", //
+		return new ApiInfo(
+				"Desafio - Boletos", 
 				"API Rest para geração de boletos", 
-				"1.0.0", //
-				"Termos de licensa de uso de software", //
-				null, //
-				"https://github.com/bnubruno/desafio", //
-				"/", //
+				"1.0.0", 
+				"Termos de licensa de uso de software", 
+				null, 
+				"https:github.com/bnubruno/desafio", 
+				"/", 
 				new ArrayList<>());
 	}
 

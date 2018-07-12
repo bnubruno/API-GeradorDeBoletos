@@ -23,15 +23,15 @@ public interface BankSlipMapper extends EntityMapper<BankSlipDTO, BankSlip> {
 		return Util.toLocalDate(dueDate).orElseThrow(() -> new InvalidObjectException("Bankslip not provided in the request body"));
 	}
 
-	@Mappings({ //
-			@Mapping(source = "dueDate", target = "due_date"), //
-			@Mapping(source = "totalInCents", target = "total_in_cents"), //
+	@Mappings({ 
+			@Mapping(source = "dueDate", target = "due_date"), 
+			@Mapping(source = "totalInCents", target = "total_in_cents"), 
 	})
 	public BankSlipDTO toDto(BankSlip entity) throws InvalidObjectException;
 
-	@Mappings({ //
-			@Mapping(source = "total_in_cents", target = "totalInCents"), //
-			@Mapping(source = "due_date", target = "dueDate"), //
+	@Mappings({ 
+			@Mapping(source = "total_in_cents", target = "totalInCents"), 
+			@Mapping(source = "due_date", target = "dueDate"), 
 			@Mapping(target = "paymentDate", ignore = true)
 	})
 	public BankSlip toEntity(BankSlipDTO dto) throws InvalidObjectException;

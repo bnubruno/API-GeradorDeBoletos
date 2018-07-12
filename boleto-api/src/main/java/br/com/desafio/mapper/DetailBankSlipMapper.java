@@ -30,17 +30,17 @@ public interface DetailBankSlipMapper extends EntityMapper<BankSlipDetailDTO, Ba
 		dto.setFine(bankSlip.getFine());
 	}
 
-	@Mappings({ //
-			@Mapping(source = "dueDate", target = "due_date"), //
-			@Mapping(source = "totalInCents", target = "total_in_cents"), //
-			@Mapping(source = "paymentDate", target = "payment_date"), //
+	@Mappings({ 
+			@Mapping(source = "dueDate", target = "due_date"), 
+			@Mapping(source = "totalInCents", target = "total_in_cents"), 
+			@Mapping(source = "paymentDate", target = "payment_date"), 
 	})
 	public BankSlipDetailDTO toDto(BankSlip entity) throws InvalidObjectException;
 
-	@Mappings({ //
-			@Mapping(source = "total_in_cents", target = "totalInCents"), //
-			@Mapping(source = "due_date", target = "dueDate"), //
-			@Mapping(source = "payment_date", target = "paymentDate"), //
+	@Mappings({ 
+			@Mapping(source = "total_in_cents", target = "totalInCents"), 
+			@Mapping(source = "due_date", target = "dueDate"), 
+			@Mapping(source = "payment_date", target = "paymentDate"), 
 	})
 	public BankSlip toEntity(BankSlipDetailDTO dto) throws InvalidObjectException;
 

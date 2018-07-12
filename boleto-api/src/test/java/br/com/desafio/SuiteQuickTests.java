@@ -13,13 +13,13 @@ import br.com.desafio.param.PayBankslipParamTest;
 import br.com.desafio.service.BankSlipServiceTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ CreateBankSlipDTOTest.class, //
-		FineTest.class, //
-		CreateBankSlipParamTest.class, //
-		PayBankslipParamTest.class, //
-		BankSlipServiceTest.class, //
-		BankSlipEndpointTest.class, //
-		MapperTests.class //
+@SuiteClasses({ CreateBankSlipDTOTest.class, 
+		FineTest.class, 
+		CreateBankSlipParamTest.class, 
+		PayBankslipParamTest.class, 
+		BankSlipServiceTest.class, 
+		BankSlipEndpointTest.class, 
+		MapperTests.class 
 })
 public class SuiteQuickTests {
 

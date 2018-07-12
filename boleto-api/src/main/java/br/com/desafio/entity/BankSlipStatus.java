@@ -2,8 +2,8 @@ package br.com.desafio.entity;
 
 public enum BankSlipStatus {
 
-	PENDING(0, "Pending"), //
-	PAID(1, "Paid"), //
+	PENDING(0, "Pending"), 
+	PAID(1, "Paid"), 
 	CANCELED(2, "Canceled");
 
 	private Integer id;
