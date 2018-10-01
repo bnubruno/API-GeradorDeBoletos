@@ -9,9 +9,6 @@ No final do desafio vamos ter os seguintes **endpoints** para:
  - Ver detalhes
  - Pagar um boleto
  - Cancelar um boleto
-
-# Teste
- 
  
 ## Demonstração
 
